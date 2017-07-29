@@ -3,8 +3,6 @@ package com.xqs.viewpagerdemo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,9 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import com.xqs.viewpagerdemo.fragment.AdFragment;
-import com.xqs.viewpagerdemo.fragment.ImageAdapter;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -66,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
         mSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.w("gender","gender-->"+gender);
-                if(gender == 1){
+                Log.w("gender", "gender-->" + gender);
+                if (gender == 1) {
                     switchImage(1);
                     gender = 2;
-                }else{
+                } else {
                     switchImage(2);
                     gender = 1;
                 }
@@ -79,18 +74,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void switchImage(int gender){
+    public void switchImage(int gender) {
         lists.clear();
         lists.addAll(initImageData(gender));
         imageAdapter.notifyDataSetChanged();
     }
 
-    public List<ImageView> initImageData(int gender){
-        if(gender == 1){
+    public List<ImageView> initImageData(int gender) {
+        if (gender == 1) {
             view1.setImageResource(boys[0]);
             view2.setImageResource(boys[1]);
             view3.setImageResource(boys[2]);
-        }else{
+        } else {
             view1.setImageResource(girls[0]);
             view2.setImageResource(girls[1]);
             view3.setImageResource(girls[2]);
@@ -104,11 +99,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public static class ImageHandler extends Handler{
+    public static class ImageHandler extends Handler {
         private WeakReference<MainActivity> weakReference;
 
-        protected ImageHandler(WeakReference<MainActivity> wk){
+        protected ImageHandler(WeakReference<MainActivity> wk) {
             weakReference = wk;
         }
 
@@ -116,16 +110,16 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             MainActivity activity = weakReference.get();
-            if (activity==null){
-                return ;
+            if (activity == null) {
+                return;
             }
 
             activity.currentIndex++;
-            if(activity.currentIndex >= activity.lists.size()){
-                activity.currentIndex=0;
+            if (activity.currentIndex >= activity.lists.size()) {
+                activity.currentIndex = 0;
             }
             activity.viewPager.setCurrentItem(activity.currentIndex);
-            activity.mHandler.sendMessageDelayed(new Message(), 2000);
+            activity.mHandler.sendMessageDelayed(new Message(), 3000);
         }
     }
 

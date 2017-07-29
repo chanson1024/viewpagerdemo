@@ -1,4 +1,4 @@
-package com.xqs.viewpagerdemo.fragment;
+package com.xqs.viewpagerdemo;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
@@ -40,16 +40,9 @@ public class ImageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-//        position %= imageViews.size();
-//        if (position<0){
-//            position = imageViews.size()+position;
-//        }
+
         ImageView view = imageViews.get(position);
-//        ViewParent vp = view.getParent();
-//        if (vp!=null){
-//            ViewGroup parent = (ViewGroup)vp;
-//            parent.removeView(view);
-//        }
+
         container.addView(view);
         //add listeners here if necessary
         return view;
